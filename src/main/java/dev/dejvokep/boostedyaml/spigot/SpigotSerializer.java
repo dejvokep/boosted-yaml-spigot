@@ -1,7 +1,22 @@
+/*
+ * Copyright 2022 https://dejvokep.dev/
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package dev.dejvokep.boostedyaml.spigot;
 
-import com.davidcubesvk.yamlUpdater.core.serialization.YamlSerializer;
-import com.davidcubesvk.yamlUpdater.core.utils.supplier.MapSupplier;
+import dev.dejvokep.boostedyaml.serialization.YamlSerializer;
+import dev.dejvokep.boostedyaml.utils.supplier.MapSupplier;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.jetbrains.annotations.NotNull;
@@ -10,14 +25,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 /**
- * Custom serializer which adds support for {@link ConfigurationSerialization}.
+ * Custom serializer singleton which supports {@link ConfigurationSerialization}.
  */
 public class SpigotSerializer implements YamlSerializer {
 
     /**
-     * Serializer instance. Should be only one per VM.
+     * Serializer instance.
      */
-    public static final SpigotSerializer INSTANCE = new SpigotSerializer();
+    private static final SpigotSerializer instance = new SpigotSerializer();
 
     /**
      * All supported abstract classes.
@@ -39,18 +54,22 @@ public class SpigotSerializer implements YamlSerializer {
 
         //Create a map
         Map<String, Object> converted = new HashMap<>();
-        //Go through all entries
+        //Iterate through all entries
         for (Map.Entry<Object, Object> entry : map.entrySet())
             //Add
             converted.put(entry.getKey().toString(), entry.getValue());
 
-        //Deserialize
-        return ConfigurationSerialization.deserializeObject(converted);
+        try {
+            //Deserialize
+            return ConfigurationSerialization.deserializeObject(converted);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
+    @Nullable
     @Override
-    @NotNull
-    public Map<Object, Object> serialize(@NotNull Object object, @NotNull MapSupplier supplier) {
+    public <T> Map<Object, Object> serialize(@NotNull T object, @NotNull MapSupplier supplier) {
         //Create a map
         Map<Object, Object> serialized = supplier.supply(1);
         //Add
@@ -72,4 +91,12 @@ public class SpigotSerializer implements YamlSerializer {
         return SUPPORTED_ABSTRACT_CLASSES;
     }
 
+    /**
+     * Returns the instance.
+     *
+     * @return the instance
+     */
+    public static SpigotSerializer getInstance() {
+        return instance;
+    }
 }
