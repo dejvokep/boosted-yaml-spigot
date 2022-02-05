@@ -25,7 +25,7 @@
     <artifactId>boosted-yaml-spigot</artifactId>
     <groupId>dev.dejvokep</groupId>
     <version>1.0</version>
-    <name>BoostedYAML</name>
+    <name>BoostedYAML for Spigot</name>
     <description>A simple-to-use library delivering boosted experience while working with YAML files; contains serializer which supports Spigot API serialization system.</description>
     <packaging>jar</packaging>
 
