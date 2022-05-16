@@ -24,7 +24,7 @@
     <!-- Artifact data -->
     <artifactId>boosted-yaml-spigot</artifactId>
     <groupId>dev.dejvokep</groupId>
-    <version>1.1</version>
+    <version>1.2</version>
     <name>BoostedYAML for Spigot</name>
     <description>A simple-to-use library delivering boosted experience while working with YAML files; contains serializer which supports Spigot API serialization system.</description>
     <url>https://github.com/dejvokep/boosted-yaml-spigot</url>
@@ -209,7 +209,7 @@
         <license>
             <name>Apache License, Version 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>manual</distribution>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
@@ -233,7 +233,7 @@
         <dependency>
             <groupId>dev.dejvokep</groupId>
             <artifactId>boosted-yaml</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
         </dependency>
         <!-- Spigot API -->
         <dependency>
