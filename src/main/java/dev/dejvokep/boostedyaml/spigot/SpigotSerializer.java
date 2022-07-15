@@ -32,7 +32,7 @@ public class SpigotSerializer implements YamlSerializer {
     /**
      * Serializer instance.
      */
-    private static final SpigotSerializer instance = new SpigotSerializer();
+    private static final SpigotSerializer INSTANCE = new SpigotSerializer();
 
     /**
      * All supported abstract classes.
@@ -97,6 +97,6 @@ public class SpigotSerializer implements YamlSerializer {
      * @return the instance
      */
     public static SpigotSerializer getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }
