@@ -72,9 +72,11 @@ public class SpigotSerializer implements YamlSerializer {
     public <T> Map<Object, Object> serialize(@NotNull T object, @NotNull MapSupplier supplier) {
         //Create a map
         Map<Object, Object> serialized = supplier.supply(1);
+        //Cast
+        ConfigurationSerializable cast = (ConfigurationSerializable) object;
         //Add
-        serialized.putAll(((ConfigurationSerializable) object).serialize());
-        serialized.computeIfAbsent(ConfigurationSerialization.SERIALIZED_TYPE_KEY, k -> object.getClass().getCanonicalName());
+        serialized.putAll((cast).serialize());
+        serialized.computeIfAbsent(ConfigurationSerialization.SERIALIZED_TYPE_KEY, k -> ConfigurationSerialization.getAlias(cast.getClass()));
         //Return
         return serialized;
     }
